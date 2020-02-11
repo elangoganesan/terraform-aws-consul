@@ -260,3 +260,9 @@ variable "iam_instance_profile_name" {
   default     = null
 }
 
+variable "additional_iam_policy" {
+  description = "Additional IAM Policy to be attached to the consul role"
+  type        = string
+  default     = null
+}
+

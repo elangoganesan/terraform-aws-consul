@@ -216,6 +216,14 @@ data "aws_iam_policy_document" "instance_role" {
   }
 }
 
+resource "aws_iam_role_policy" "custom_policy" {
+  count  = var.aadditional_iam_policy == null ? 0 : 1
+  name   = "custom-policy"
+  role   = element(concat(aws_iam_role.instance_role.*.id, [""]), 0)
+  policy = var.aadditional_iam_policy
+}
+
+
 # ---------------------------------------------------------------------------------------------------------------------
 # THE IAM POLICIES COME FROM THE CONSUL-IAM-POLICIES MODULE
 # ---------------------------------------------------------------------------------------------------------------------

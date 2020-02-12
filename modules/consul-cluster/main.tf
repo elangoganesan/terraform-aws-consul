@@ -31,6 +31,21 @@ resource "aws_autoscaling_group" "autoscaling_group" {
   service_linked_role_arn   = var.service_linked_role_arn
 
   enabled_metrics = var.enabled_metrics
+  dynamic "initial_lifecycle_hook" {
+    for_each = var.initial_life_cycle_hooks
+    iterator = hook
+    content {
+      name                 = hook.value.name
+      default_result       = hook.value.default_result
+      heartbeat_timeout    = hook.value.heartbeat_timeout
+      lifecycle_transition = hook.value.lifecycle_transition
+
+      notification_metadata = hook.value.notification_metadata
+
+      notification_target_arn = hook.value.notification_target_arn
+      role_arn                = hook.value.role_arn
+    }
+  }
 
   tags = flatten(
     [

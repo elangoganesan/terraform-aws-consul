@@ -217,7 +217,7 @@ data "aws_iam_policy_document" "instance_role" {
 }
 
 resource "aws_iam_role_policy" "custom_policy" {
-  count  = var.additional_iam_policy == null ? 0 : 1
+  count  = var.enable_additional_iam_policy ? 1 : 0
   name   = "custom-policy"
   role   = element(concat(aws_iam_role.instance_role.*.id, [""]), 0)
   policy = var.additional_iam_policy

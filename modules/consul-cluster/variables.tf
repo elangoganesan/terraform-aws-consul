@@ -272,7 +272,7 @@ variable "enable_additional_iam_policy" {
   default     = false
 }
 
-variable "life_cycle_hooks" {
+variable "initial_life_cycle_hooks" {
   description = "Lifecycle Hook to Attach to AutoScaling Group "
   type = list(object({
     name                    = string

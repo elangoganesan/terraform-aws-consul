@@ -266,3 +266,9 @@ variable "additional_iam_policy" {
   default     = null
 }
 
+variable "enable_additional_iam_policy" {
+  description = "Additional IAM Policy to be attached to the consul role"
+  type        = bool
+  default     = false
+}
+
